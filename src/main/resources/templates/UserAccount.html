@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserAccount</title>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/UserPassChange.js"></script>
+    <style>
+        *{  
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            position: relative;
+            width: 700px;
+            height: 500px;
+            margin: 2% auto 5%;
+            border: 1px solid black;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            color: #444444;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #notify{
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            padding: 10px 0px;
+        }
+        p {
+            display: inline-block;
+            padding-left: 20px;
+            font-size: 1.5rem;
+            font-weight: 450;
+            line-height: 50px;
+        }
+        .box1:first-child{
+            margin-top: 30px;
+        }
+        .box1:last-child{
+            margin-bottom: 30px;
+        }
+        .btn {
+            margin-left: auto;
+            margin-right: auto;
+            height: 35px;
+            width: 300px;
+            margin-top: 50px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid black;
+            cursor: pointer;
+            background-color:  #ffb03b;
+            margin-bottom: 30px;
+        }
+        .btn:hover{
+            opacity: 0.9;
+        }
+        .box {
+            margin-left: 200px;
+        }
+        .btn2{
+            margin-top: -20px;
+        }
+        #bg{
+	    position:fixed;
+	    left:0;
+	    top:0;
+	    height:100%;
+	    width:100%;
+	    background:rgba(0, 0, 0, .4);
+        }
+        section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 650px;
+            height: 420px;
+            margin: auto;
+            text-align: center;
+            z-index: 9999;
+            border: 1px solid black;
+            background-color: rgb(202, 248, 240);
+            border-radius: 10px;
+        }
+        .modal-box {
+            display: none;
+        }
+        label {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 10px 0px 0px -29%;
+        }
+        .form-control{
+            height: 40px;
+            width: 300px;
+            border-radius: 5px;
+            border: 2px solid black;
+            padding-left: 5px;
+        }
+        /* .btn {
+            height: 35px;
+            width: 300px;
+            margin-top: 20px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid black;
+            cursor: pointer;
+            background-color:  #ffb03b;
+        }
+        .btn:hover{
+            opacity: 0.9;
+        } */
+        .notify {
+            text-align: center;
+            font-size: 0.7rem;
+            width: 355px;
+            padding: 10px 0px 0px 53px;
+        }
+        .box {
+            padding-top: 30px;
+            width: 100%;
+            text-align: center;
+            padding-bottom: 10px;
+            font-weight: 400;
+        }
+        .account-btn{
+            width: 400px;
+            margin: 0 auto;
+            margin: 15px 0px 10px;
+        }
+        .account-btn a {
+            text-decoration: none;
+        }
+        #notify{
+			line-height: 30px;
+			padding:10px;
+			font-weight: 500;
+			text-align:center;
+			color:red;
+			padding-left:10px;
+        }
+        .btn-user{
+            margin-top: -20px;
+        }
+        h1{
+            padding-top: 20px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .pad-lef1 {
+            padding-left: 30px;
+        }
+        .pad-lef2 {
+            padding-left: 45px;
+        }
+    </style>
+</head>
+<body>
+      
+    <div th:if="${msg1}">
+        <h1 id="notify" th:text="${msg1}"></h1>
+    </div>
+    <form th:action="@{/UserAccount}" method="post">
+    <div class="box1">
+        <p>氏名 :</p>
+        <p class="userinfor" th:text="${UserName}" id="UserName"></p>
+    </div>
+    <div class="box1">
+        <p>フリガナ :</p>
+        <p class="userinfor" th:text="${furigana}" id="furigana"></p>
+    </div>
+    <div class="box1">
+        <p>生年月日 :</p>
+        <p class="userinfor" th:text="${birthday}" id="birthday"></p>
+    </div>
+    <div class="box1">
+        <p>性別 :</p>
+        <p class="userinfor" th:text="${sex}" id="sex"></p>
+    </div>
+    <div class="box1">
+        <p>作業 :</p>
+        <p class="userinfor" th:text="${job}" id="job"></p>
+    </div>
+    <div class="box1">
+        <p>Email アドレス :</p>
+        <p class="userinfor" th:text="${email}" id="email"></p>
+    </div>
+    <div class="box1">
+        <p>パスワード :</p>
+        <p class="userinfor" th:text="${pass}" id="pass"></p>
+    </div>
+   </form>
+
+   <section class="modal-box">
+   
+    <h1>パスワード変更</h1>
+    <form th:action="@{/passChange}" method="POST">
+       <div class="form-group">
+            <label for="id">ID/Eメール</label>
+            <input type="input" class="form-control" id="email" name="email" placeholder="Eメールを入力">
+        </div>
+        <div class="form-group">
+            <label class="pad-lef1" for="sender">現在パスワード</label>
+            <input type="password" class="form-control" id="pass" name="pass" placeholder="現在パスワード">
+        </div>
+        
+        
+        <button type="submit" class="btn"> 保存</button>
+    </form>
+   
+    
+   </section>
+
+  
+    <div id="passChange" class="box">
+        <button type="submit" class="btn" style="margin-right: 60%"> 
+            パスワード　変更
+           </button>
+    </div>
+   <form th:action="@{/backHome}" method="POST">
+    <div class="box">
+        <button type="submit" class="btn btn2 " style="margin-right: 60%"> 
+            ログアウト
+           </button>
+    </div>
+</form>
+   
+</body>
+</html>

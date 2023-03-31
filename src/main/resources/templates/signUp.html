@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+     * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+    }
+    html{
+            font-size: 16px;
+    }
+    body{
+            font-family: Arial, Helvetica, sans-serif;
+            background: whitesmoke;
+            color: #444444;
+    }
+        
+    main {
+            width: 400px;
+            height: auto;
+            margin: 4% auto 30px;
+            text-align: center;
+            border: 1px solid black;
+            padding-top: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    h1{
+            font-size: 2rem;
+            font-weight: 700;
+    }
+    label {
+            text-align: left;
+            display: block;
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 10px 0px 0px 52px;
+    }
+    .form-control{
+            height: 40px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid black;
+            padding-left: 5px;
+    }
+    .btn {
+            height: 35px;
+            width: 300px;
+            margin-top: 20px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid black;
+            cursor: pointer;
+            background-color:  #ffb03b;
+    }
+    .btn:hover{
+            opacity: 0.9;
+    }
+    .notify {
+            text-align: center;
+            font-size: 0.7rem;
+            width: 355px;
+            padding: 10px 0px 20px 53px;
+    }
+    .radio {
+        width: 100%;
+    }
+    .radio p {
+        float: left;
+        padding: 20px 0px 0px 52px;
+    }
+    .radio-label {  
+        display: inline-block;
+        padding: 10px 0px 0px 0px;
+    }
+    .select-label {
+        float: left;
+    }
+    .select {
+        border: 1px solid black;
+        width: 200px;
+        height: 25px;
+        padding-left: 5px;
+        margin-top: 10px;
+    }
+    a {
+        text-decoration: none;
+        color: #444444;
+    }
+    #notify{
+			line-height: 30px;
+			font-weight: 450;
+			text-align:center;
+			color:red;
+			padding:10px;
+			padding-left:10px;
+}
+
+    </style>
+</head>
+<body>
+    <main>
+    
+    <div th:if="${msg}">
+  <h1 id="notify" th:text="${msg}"></h1>
+</div>
+        <form th:action="@{/login}" method="POST">
+            <div class="form-group">
+                <label for="name">氏名</label>
+                <input type="input" class="form-control" id="userName" name="userName" placeholder="氏名（例：アマゾン 太郎）">
+            </div>
+            <div class="form-group">
+                <label for="furigana">フリガナ</label>
+                <input type="input" class="form-control" id="furigana" name="furigana" placeholder="フリガナ">
+            </div>
+            <div class="form-group">
+                <label for="date">生年月日</label>
+                <input type="date" class="form-control" id="birthday" name="birthday" placeholder="生年月日">
+            </div>
+            <div class="radio"> 
+                <p>性別：</p>              
+                <label class="radio-label" for="sex">男</label>
+                <input type="radio" id="sex" name="sex" value="男">
+                <label class="radio-label"  for="sex1">女</label>
+                <input type="radio" id="sex1" name="sex" value="女"> 
+            </div>
+            <div>
+                <label class="select-label" for="job">作業：</label>
+                <select class="select" name="job" id="job">
+                    <option value="学生">学生</option>
+                    <option value="教員">教員</option>
+                    <option value="IT ンジニア">IT ンジニア</option>
+                    <option value="他">他</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="email">メールアドレス</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="メールアドレス">
+            </div>
+            <div class="form-group">
+                <label for="pass">パスワード</label>
+                <input type="password" class="form-control" id="pass" name="pass" placeholder="パスワード">
+            </div>
+            <button type="submit" class="btn">次に進む</button>
+            <p class="notify">私のページの利用規約とプライバシー規約に同意いただける場合はログインしてください。</p>
+        </form>
+    </main>
+</body>
+</html>

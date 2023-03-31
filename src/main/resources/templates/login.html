@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/login.css">
+   <script src="login.js"></script>
+</head>
+<body>
+    <div th:if="${msg}">
+  <h1 id="notify" th:text="${msg}"></h1>
+</div>
+
+    <main>
+        <h1>ログイン</h1>
+        <form th:action="@{/UserAccount}" method="POST">
+           <div class="form-group">
+                <label for="id">ID/Eメール</label>
+                <input type="input" class="form-control" id="email" name="email" placeholder="Eメールを入力">
+            </div>
+            <div class="form-group">
+                <label for="sender">パスワード</label>
+                <input type="password" class="form-control" id="pass" name="pass" placeholder="パスワード">
+            </div>
+            <p class="notify">私のページの利用規約とプライバシー規約に同意いただける場合はログインしてください。</p>
+            <button type="submit" class="btn"> 次に進む</button>
+        </form>
+       
+        
+    </main>
+    
+    <form th:action="@{/signUp}" method="POST">
+    <div class="box">
+        <h5 class="signUp-notify">初めて私のページをご利用ですか？</h5>
+        <button type="submit" class="btn account-btn"> 
+            websiteアカウントを作成する
+           </button>
+    </div>
+    </form>
+    <form th:action="@{/userData}" method="POST">
+        <div class="box">
+            <button type="submit" class="btn btn-user "> 
+                ユーザーのデータ
+               </button>
+        </div>
+    </form>
+   
+    
+</body>
+</html>

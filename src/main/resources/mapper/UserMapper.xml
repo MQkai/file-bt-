@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kk.soft.co.jp.sys.mapper.UserMapper">
+
+    <insert id="insert" parameterType="kk.soft.co.jp.sys.model.UserModel" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO mp_auth.touroku_mqk(userName,furigana,birthday,sex,job,email,pass) VALUES (#{userName},#{furigana},#{birthday},#{sex},#{job},#{email},#{pass})
+    </insert>
+	
+	<select id="checkAccount" resultType="kk.soft.co.jp.sys.model.UserModel"  parameterType = "kk.soft.co.jp.sys.model.UserModel">
+        	SELECT email FROM mp_auth.touroku_mqk WHERE email = #{email} ; 
+    </select>
+    <select id="checkLogin" resultType="kk.soft.co.jp.sys.model.UserModel"  parameterType = "kk.soft.co.jp.sys.model.UserModel">
+        	SELECT email,pass  FROM mp_auth.touroku_mqk
+       		WHERE ((email = #{email}) and (pass = #{pass})); 	
+    </select>
+    <select id="takeAll" resultType="kk.soft.co.jp.sys.model.UserModel"  parameterType = "kk.soft.co.jp.sys.model.UserModel">
+        	SELECT userName,furigana,birthday,sex,job,email,pass FROM mp_auth.touroku_mqk 
+        	WHERE ((email = #{email}) and (pass = #{pass}));
+    </select>
+    <select id="takeData" resultType="kk.soft.co.jp.sys.model.UserModel"  parameterType = "kk.soft.co.jp.sys.model.UserModel">
+        	SELECT * FROM mp_auth.touroku_mqk ;	
+    </select>
+    <select id="selectPass" resultType="kk.soft.co.jp.sys.model.UserModel"  parameterType = "kk.soft.co.jp.sys.model.UserModel">
+        	SELECT *  FROM mp_auth.touroku_mqk
+       		WHERE email = #{email}; 	
+    </select>
+    <update id="update"  parameterType = "kk.soft.co.jp.sys.model.UserModel" >
+        	UPDATE mp_auth.touroku_mqk SET pass = #{pass} WHERE   email = #{email};	
+    </update>
+    
+   
+ 
+
+</mapper>

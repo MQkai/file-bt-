@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head >
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>userData</title>
+    <style>
+       body{
+        width: 1250px;
+        margin: 0 auto;
+        text-align: center;
+       } 
+       th,td {
+        text-align: center;
+        line-height: 40px;
+        width: 250px;
+        border-bottom: 2px solid black;
+        border-right: 2px solid black;
+        border-left: none;
+       }
+       table {
+        border: 2px solid black;
+       }
+       th{
+        background-color: rgb(61, 224, 46);
+       }
+       td{
+        background-color: rgb(176, 250, 169);
+       }
+       th:last-child,td:last-child{
+        border-right: none;
+       }
+        .btn {
+            height: 35px;
+            width: 300px;
+            margin-top: 20px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid black;
+            cursor: pointer;
+            background-color:  #ffb03b;
+            margin-bottom: 30px;
+        }
+        .btn:hover{
+            opacity: 0.9;
+        }
+        
+    </style>
+</head >
+<body >
+  <h1 class="title">ユーザーのデータ</h1>
+<form th:action="@{/userData}" method="POST">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>USERNAME</th>
+            <th>FURIGANA</th>
+            <th>BIRTHDAY</th>
+            <th>SEX</th>
+            <th>JOB</th>
+            <th>EMAIL</th>
+            <th>PASS</th>
+        </tr>
+        <tr th:each ="a : ${a}">
+            <td><span th:text="${a.id}"></span></td> 
+            <td><span th:text="${a.userName}"></span></td>
+            <td><span th:text="${a.furigana}"></span></td>
+            <td><span th:text="${a.birthday}"></span></td>
+            <td><span th:text="${a.sex}"></span></td>
+            <td><span th:text="${a.job}"></span></td>
+            <td><span th:text="${a.email}"></span></td>
+            <td><span th:text="${a.pass}"></span></td> 
+        </tr>
+    </table>
+</form>
+<form th:action="@{/backHome}" method="POST">
+    <div class="box">
+        <button type="submit" class="btn btn2 "> 
+            ログインページ戻す
+           </button>
+    </div>
+</form>
+</body >
+</html >

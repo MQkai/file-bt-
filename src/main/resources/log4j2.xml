@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="off">
+    <Properties>
+        <Property name="app_name">con cec </Property>
+        <Property name="date">%d{yyyy-MM-dd HH:mm:ss.SSS}</Property>
+        <Property name="daily_log">logs/app${app_name}_%d{yyyy-MM-dd}.log</Property>
+        <Property name="info_log"> C:/Users/Admin/Desktop/fileLog/inforLog/infor.log</Property>
+        <Property name="warn_log"> C:/Users/Admin/Desktop/fileLog/warnLog/warn.log</Property>
+        <Property name="error_log"> C:/Users/Admin/Desktop/fileLog/errorLog/error.log</Property>
+        
+    </Properties>
+    <appenders>
+        <Console
+            name="Console"
+            target="SYSTEM_OUT"
+        >
+            <PatternLayout pattern="${date}, [${app_name}], %highlight{%-5level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green} , %logger{36}, %msg %n" />
+        </Console>
+        <RollingFile
+            name="infoLog"
+            fileName="${info_log}"
+            filePattern="${info_log}.%d{yyyy-MM-dd}.gz">
+           		<ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/>
+            	<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            
+            <PatternLayout pattern="${date}, [${app_name}], [ %-5level ], %logger{10}, %msg %n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+        
+        <RollingFile
+            name="warnLog"
+            fileName="${warn_log}"
+            filePattern="${warn_log}.%d{yyyy-MM-dd}.gz">
+            <filter>
+            	<ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+            	<ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            </filter>
+            
+           		  
+
+            <PatternLayout pattern="${date}, [${app_name}], [ %-5level ], %logger{10}, %msg %n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+        <RollingFile
+            name="errorLog"
+            fileName="${error_log}"
+            filePattern="${error_log}.%d{yyyy-MM-dd}.gz">
+            
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${date}, [${app_name}], [ %-5level ], %logger{10}, %msg %n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+    </appenders>
+    <loggers>
+        <root level="info">
+            <appender-ref ref="Console" />
+            <appender-ref ref="infoLog" />
+            <appender-ref ref="warnLog" />
+            <appender-ref ref="errorLog" />
+             
+            
+        </root>
+        
+    </loggers>
+</configuration>
